@@ -10,6 +10,16 @@ void validateArguments(int argc)
     }
 }
 
+class my_logic_error : std::logic_error {
+
+public:
+    explicit my_logic_error(const char *arg) : logic_error(arg){}
+    const char* what() const noexcept override {return(arg);}
+private:
+    const char *arg;
+};
+
+
 class Resource
 {
 public:
@@ -18,7 +28,7 @@ public:
         std::cout << "Using resource. Passed " << *arg << std::endl;
         if (*arg == 'd')
         {
-            throw std::logic_error("Passed d. d is prohibited.");
+            throw my_logic_error("Passed d. d is prohibited.");
         }
     }
 };
@@ -36,7 +46,7 @@ int main(int argc, char* argv[])
         rsc->use(argument);
         delete rsc;
     }
-    catch (std::logic_error& e)
+    catch (my_logic_error& e)
     {
         std::cout << e.what() << std::endl;
     }
