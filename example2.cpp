@@ -23,6 +23,7 @@ void deallocateInts(std::vector<int*> numbers)
 int main()
 {
     std::vector<int*> num = allocateInts();
+    deallocateInts(num);
     std::cout << "Hello World!" << std::endl;
     return 0;
 }
