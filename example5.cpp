@@ -1,5 +1,6 @@
 #include <iostream>
 #include <chrono>
+#include <memory>
 
 struct Partner {};
 
@@ -22,26 +23,17 @@ bool processSecond()
 
 void convertMe()
 {
-    Partner* pFirst = new Partner();
-
-    if (!process())
-    {
-        delete pFirst;
-        return;
-    }
-
-    Partner* pSecond = new Partner();
-
-    if (!processSecond())
-    {
-        delete pFirst;
-        delete pSecond;
-        return;
-    }
+    //Partner* pFirst = new Partner();
+    std::unique_ptr<Partner> pFirst(new Partner());
 
     process();
-    delete pFirst;
-    delete pSecond;
+
+//    Partner* pSecond = new Partner();
+    std::unique_ptr<Partner> pSecond(new Partner());
+
+    processSecond();
+
+    process();
 }
 
 int main()
