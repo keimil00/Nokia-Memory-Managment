@@ -23,13 +23,13 @@ bool processSecond()
 
 void convertMe()
 {
-    //Partner* pFirst = new Partner();
-    std::unique_ptr<Partner> pFirst(new Partner());
+//    Partner* pFirst= new Partner();
+    std::unique_ptr<Partner> pFirst = std::make_unique<Partner>();
 
     process();
 
 //    Partner* pSecond = new Partner();
-    std::unique_ptr<Partner> pSecond(new Partner());
+    std::unique_ptr<Partner> pSecond = std::make_unique<Partner>();
 
     processSecond();
 
